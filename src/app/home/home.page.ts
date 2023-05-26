@@ -1,3 +1,4 @@
+import { FotoService } from './../services/foto.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(
+    private fotoService: FotoService
+  ) {}
+
+  tirarFoto() {
+    this.fotoService.tirarFoto();
+  }
 
 }
