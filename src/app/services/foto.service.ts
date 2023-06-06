@@ -15,7 +15,7 @@ import { Foto } from '../models/Foto.interface';
   providedIn: 'root',
 })
 export class FotoService {
-  fotos: Foto[] = [];
+  fotos: Foto[] = []; // Armazenar fotos
   private FOTO_ARMAZENAMENTO: string = 'fotos';
 
   constructor(private platform: Platform) { }
@@ -25,7 +25,7 @@ export class FotoService {
     const listaFotos = await Preferences.get({ key: this.FOTO_ARMAZENAMENTO });
     this.fotos = JSON.parse(listaFotos.value as string) || [];
 
-    // Se estiver rodando no navegador...
+    // Se não estiver rodando no navegador...
     if (!this.platform.is('hybrid')) {
       // Exibir a foto lendo-a no formato base64
       for (let foto of this.fotos) {
@@ -46,7 +46,7 @@ export class FotoService {
     const fotoCapturada = await Camera.getPhoto({
       resultType: CameraResultType.Uri, // dados baseados em arquivos; oferece o melhor desempenho
       source: CameraSource.Camera, // tirar automaticamente uma nova foto com a câmera
-      quality: 100,
+      quality: 50, // Trocar para 50 para não precisar fazer compactação da imagem
     });
 
     const salvarArquivoFoto = await this.salvarFoto(fotoCapturada);
