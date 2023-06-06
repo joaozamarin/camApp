@@ -15,6 +15,7 @@ export class HomePage implements ViewWillEnter {
     private fotoService: FotoService,
     private actionSheetController: ActionSheetController
   ) {}
+
   ionViewWillEnter() {
     this.getFotos();
   }
@@ -25,7 +26,6 @@ export class HomePage implements ViewWillEnter {
 
   tirarFoto() {
     this.fotoService.tirarFoto();
-    this.getFotos();
   }
 
   public async showActionSheet(foto: Foto, position: number) {
@@ -37,7 +37,6 @@ export class HomePage implements ViewWillEnter {
         icon: 'trash',
         handler: () => {
           this.fotoService.deletePicture(foto, position);
-          this.getFotos();
         }
       },
       {
