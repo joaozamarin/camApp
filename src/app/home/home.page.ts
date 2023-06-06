@@ -1,19 +1,23 @@
 import { Foto } from './../models/Foto.interface';
 import { FotoService } from './../services/foto.service';
 import { Component } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ViewWillEnter } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements ViewWillEnter {
+  fotos: Foto[] = [];
 
   constructor(
     private fotoService: FotoService,
     private actionSheetController: ActionSheetController
   ) {}
+  ionViewWillEnter() {
+    this.getFotos();
+  }
 
   async ngOnInit() {
     await this.fotoService.carregarFotosSalvas();
@@ -21,6 +25,7 @@ export class HomePage {
 
   tirarFoto() {
     this.fotoService.tirarFoto();
+    this.getFotos();
   }
 
   public async showActionSheet(foto: Foto, position: number) {
@@ -32,6 +37,7 @@ export class HomePage {
         icon: 'trash',
         handler: () => {
           this.fotoService.deletePicture(foto, position);
+          this.getFotos();
         }
       },
       {
@@ -46,4 +52,7 @@ export class HomePage {
     await actionSheet.present();
   }
 
+  getFotos() {
+    this.fotos = this.fotoService.fotos;
+  }
 }
