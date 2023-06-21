@@ -8,13 +8,16 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>{{ tipo === 'descrever' ? 'Descrição da Imagem' : 'Objetos na Imagem' }}</ion-card-title>
+      <ion-row class="ion-justify-content-between ion-align-items-center">
+        <ion-card-title>{{ tipo === 'descrever' ? 'Descrição da Imagem' : 'Objetos na Imagem' }}</ion-card-title>
+        <ion-button (click)="closeModal()" color="danger" size="small">X</ion-button>
+      </ion-row>
     </ion-card-header>
     <ion-card-content *ngIf="tipo === 'descrever'">
       {{descricao}} <br>
       <strong>Confiança: </strong>
       <ion-badge class="direita">
-        {{confianca}}
+        {{confianca | percent}}
       </ion-badge>
     </ion-card-content>
 
