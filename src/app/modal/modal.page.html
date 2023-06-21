@@ -21,9 +21,20 @@
       </ion-badge>
     </ion-card-content>
 
-    <ion-item *ngFor="let item of tags" lines="full">
-      <ion-label>{{item | titlecase}}</ion-label>
-    </ion-item>
+    <div *ngIf="tipo === 'tags';">
+      <ion-item *ngFor="let item of tags" lines="full">
+        <ion-label>{{item.name | titlecase}}</ion-label>
+        <ion-label>
+          <ion-badge>{{item.confidence | percent}}</ion-badge>
+        </ion-label>
+      </ion-item>
+    </div>
+
+    <div *ngIf="tipo === 'descrever';">
+      <ion-item *ngFor="let item of tags" lines="full">
+        <ion-label>{{item | titlecase}}</ion-label>
+      </ion-item>
+    </div>
   </ion-card>
 
 </ion-content>

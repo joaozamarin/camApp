@@ -11,7 +11,7 @@ export class ModalPage implements OnInit {
   // Dados que vieram por parâmetro do componentProps
   @Input() descricao: string = '';
   @Input() confianca: string = '';
-  @Input() tags: string[] = [];
+  @Input() tags: any[] = [];
   @Input() tipo: string = '';
 
   constructor(public modalController: ModalController) { }
